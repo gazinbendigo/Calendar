@@ -1,0 +1,10 @@
+<template name="baseLayout">
+    <div id="wrapper">
+        {{> Template.dynamic template=header}}
+        {{> Template.dynamic template=main}}
+    </div>
+    <div id="push"></div>
+    <div id="footer">
+        {{> Template.dynamic template=footer}}
+    </div>
+</template>

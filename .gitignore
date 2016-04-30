@@ -1,0 +1,12 @@
+node_modules/
+
+## Directory-based project format:
+.idea/*
+
+ server/config/security.js
+ server/config/policy.js
+ server/*.json
+ settings-production.json
+
+
+Calendar.iml
