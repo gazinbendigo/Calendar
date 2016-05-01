@@ -14,6 +14,18 @@ Template.events.onCreated( () => {
 
 Template.events.onRendered( () => {
 	$( '#events-calendar' ).fullCalendar({
+		//Create rosta view for next 14 days
+		views: {
+			//javascript does not allow numbers in variables
+			timelineSevenDays: {
+				type: 'timeline',
+				duration: { days: 7 }
+			},
+			timelineFourteenDays: {
+				type: 'timeline',
+				duration: { days: 14 }
+			}
+		},
 		events( start, end, timezone, callback ) {
 			let data = Events.find().fetch().map( ( event ) => {
 				event.editable = !isPast( event.start );
@@ -25,15 +37,18 @@ Template.events.onRendered( () => {
 			}
 		},
 		eventRender( event, element ) {
-			element.find( '.fc-content' ).html(`<h4>${ event.title }</h4><p class="guest-count">${ event.guests } Guests</p><p class="type-${ event.type }">#${ event.type }</p>`);
+			element.find( '.fc-content' ).html(`<h4>${event.title}</h4><p class="guest-count">${event.guests} Guests</p><p class="type-${event.type}">#${event.type}</p>`);
 		},
 		eventDrop( event, delta, revert ) {
 			let date = event.start.format();
-			if ( !isPast( date ) ) {
+			console.log(date);
+			let end = moment(date).add(14, 'days').format("YYYY-MM-DD");
+			console.log(end);
+			if (!isPast( date)) {
 				let update = {
 					_id: event._id,
 					start: date,
-					end: date
+					end: end
 				};
 
 				Meteor.call( 'editEvent', update, ( error ) => {
