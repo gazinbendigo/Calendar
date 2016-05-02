@@ -12,6 +12,7 @@ Meteor.methods({
 			start: String,
 			end: String,
 			type: String,
+			duration: Number,
 			guests: Number
 		});
 
@@ -34,6 +35,7 @@ Meteor.methods({
 			start: String,
 			end: String,
 			type: Match.Optional( String ),
+			duration: Number,
 			guests: Match.Optional( Number )
 		});
 
